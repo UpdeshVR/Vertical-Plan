@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
- 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Vertical Plane Tracking</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-</head>
- 
-<body>
-    <model-viewer src="/assets/model.glb" ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall"
-        camera-controls touch-action="pan-y" alt="A 3D model of some wall art" style="width: 100%; height: 100vh;">
-    </model-viewer>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Model Viewer with AR</title>
     <script>
-        document.querySelector('model-viewer').addEventListener('error', (event) => {
-            console.error('Model Viewer error:', event);
+      // Function to load model-viewer script
+      function loadModelViewerScript() {
+        var script = document.createElement("script");
+        script.type = "module";
+        script.src =
+          "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
+        script.onload = function () {
+          console.log("model-viewer script loaded successfully.");
+        };
+        document.head.appendChild(script);
+      }
+
+      // Load model-viewer script when the page loads
+      window.onload = function () {
+        loadModelViewerScript();
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Button to activate the camera -->
+    <button id="activate-model-viewer">Activate Model Viewer</button>
+
+    <!-- Container for the model-viewer element -->
+    <div id="model-container" style="display: none">
+      <model-viewer
+        src="https://cdn.glitch.global/d46f73ae-be85-4ed3-adb8-c2ba33da721d/a2%201.glb?v=1719386361672"
+        ar
+        ar-placement="wall"
+        camera-controls
+        touch-action="pan-y"
+        alt="A 3D model of some wall art"
+      >
+      </model-viewer>
+    </div>
+
+    <script>
+      document
+        .getElementById("activate-model-viewer")
+        .addEventListener("click", function () {
+          var modelContainer = document.getElementById("model-container");
+          modelContainer.style.display = "block";
         });
     </script>
-</body>
- 
+  </body>
 </html>
